@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050b18">
+<title>GAIA — Assistente</title>
+<style>
+:root{color-scheme:dark;--bg:#050b18;--panel:#0b1730;--line:rgba(93,174,255,.22);--blue:#43b7ff;--cyan:#72e4ff;--muted:#9bb0ca}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 50% 18%,#102d56 0,#08152b 34%,var(--bg) 72%);color:#f4f8ff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+.app{max-width:520px;margin:auto;min-height:100vh;padding:env(safe-area-inset-top) 18px calc(22px + env(safe-area-inset-bottom));display:flex;flex-direction:column}
+header{height:64px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.brand{font-size:21px;font-weight:800;letter-spacing:5px;background:linear-gradient(90deg,#fff,#64caff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.status{font-size:11px;letter-spacing:1.5px;color:#8de7ff;display:flex;align-items:center;gap:7px}
+.dot{width:7px;height:7px;border-radius:50%;background:#56e6b2;box-shadow:0 0 12px #56e6b2}
+main{flex:1;display:flex;flex-direction:column;align-items:center;padding-top:28px}
+.avatar-wrap{width:210px;height:210px;position:relative;display:grid;place-items:center;margin:8px auto 16px}
+.orbit{position:absolute;inset:4px;border:1px solid rgba(81,190,255,.3);border-radius:50%;box-shadow:0 0 32px rgba(36,151,255,.12),inset 0 0 30px rgba(36,151,255,.08)}
+.orbit:before,.orbit:after{content:"";position:absolute;border:1px solid rgba(91,210,255,.2);border-radius:50%;inset:15px}
+.orbit:after{inset:-7px;border-style:dashed;animation:spin 28s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.avatar{width:166px;height:166px;border-radius:50%;object-fit:cover;filter:drop-shadow(0 0 22px rgba(58,173,255,.35))}
+.core{width:150px;height:150px;border-radius:50%;background:radial-gradient(circle at 50% 35%,#183e67,#0b1b35 60%,#071020);border:1px solid rgba(110,214,255,.45);display:flex;align-items:center;justify-content:center;box-shadow:0 0 45px rgba(36,159,255,.2),inset 0 0 28px rgba(65,181,255,.2);font-size:68px}
+h1{font-size:29px;letter-spacing:7px;margin:2px 0 5px}
+.subtitle{font-size:13px;color:var(--muted);letter-spacing:1.2px}
+.greeting{width:100%;margin-top:30px;background:linear-gradient(145deg,rgba(16,39,72,.9),rgba(8,20,39,.9));border:1px solid var(--line);border-radius:20px;padding:17px 17px 15px;box-shadow:0 12px 35px rgba(0,0,0,.18)}
+.greeting strong{display:block;font-size:15px;margin-bottom:7px}
+.greeting p{margin:0;color:#b9cbe0;font-size:14px;line-height:1.5}
+.suggestions{width:100%;display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 18px}
+.suggestion{border:1px solid var(--line);border-radius:999px;padding:9px 12px;color:#c6eaff;background:rgba(20,55,91,.42);font-size:12px}
+.spacer{flex:1;min-height:12px}
+.composer{width:100%;background:rgba(8,20,39,.94);border:1px solid rgba(89,180,255,.35);border-radius:20px;padding:9px;display:flex;align-items:center;gap:8px;box-shadow:0 0 25px rgba(28,133,220,.1)}
+input{min-width:0;flex:1;background:transparent;border:0;outline:0;color:white;font-size:15px;padding:10px 7px}
+input::placeholder{color:#7890ad}
+.iconbtn,.send{width:42px;height:42px;border-radius:14px;border:1px solid var(--line);background:#102746;color:#9edfff;font-size:18px}
+.send{background:linear-gradient(135deg,#168bdb,#2459c7);border:0;color:white;font-size:19px}
+.note{text-align:center;color:#7288a5;font-size:10px;line-height:1.4;margin:10px 8px 0}
+.messages{width:100%;display:flex;flex-direction:column;gap:9px;margin:10px 0}
+.msg{max-width:88%;padding:11px 13px;border-radius:15px;font-size:14px;line-height:1.45}
+.msg.user{align-self:flex-end;background:#164d82;border:1px solid #287fbd}
+.msg.gaia{align-self:flex-start;background:#0d203a;border:1px solid var(--line);color:#d8eaff}
+footer{text-align:center;font-size:10px;color:#526b89;padding-top:12px;letter-spacing:1px}
+button{cursor:pointer}
+@media(max-height:720px){.avatar-wrap{width:160px;height:160px}.core{width:120px;height:120px;font-size:54px}.avatar{width:130px;height:130px}main{padding-top:12px}.greeting{margin-top:18px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand">GAIA</div><div class="status"><span class="dot"></span> SISTEMA PRONTO</div></header>
+<main>
+  <div class="avatar-wrap" aria-label="Avatar da Gaia">
+    <div class="orbit"></div><div class="core" aria-hidden="true">◉</div>
+  </div>
+  <h1>GAIA</h1>
+  <div class="subtitle">INTELIGÊNCIA ARTIFICIAL PESSOAL</div>
+  <section class="greeting">
+    <strong>Olá. Eu sou a Gaia.</strong>
+    <p>Estou pronta para conversar e ajudar. Qual será nossa primeira tarefa?</p>
+  </section>
+  <div class="suggestions">
+    <button class="suggestion" data-prompt="O que você pode fazer?">O que você pode fazer?</button>
+    <button class="suggestion" data-prompt="Quero organizar meu dia.">Organizar meu dia</button>
+    <button class="suggestion" data-prompt="Conte uma curiosidade interessante.">Uma curiosidade</button>
+  </div>
+  <div class="messages" id="messages" aria-live="polite"></div>
+  <div class="spacer"></div>
+  <form class="composer" id="chat">
+    <button class="iconbtn" type="button" id="voice" aria-label="Ouvir saudação">♫</button>
+    <input id="entry" autocomplete="off" placeholder="Converse com a Gaia..." aria-label="Mensagem para Gaia">
+    <button class="send" type="submit" aria-label="Enviar mensagem">➤</button>
+  </form>
+  <p class="note">Protótipo visual • A inteligência artificial e a memória serão conectadas na próxima etapa.</p>
+</main>
+<footer>GAIA 1.0&nbsp; • &nbsp;INTERFACE INICIAL</footer>
+</div>
+<script>
+const messages=document.getElementById('messages'),entry=document.getElementById('entry');
+function add(text,who){const el=document.createElement('div');el.className='msg '+who;el.textContent=text;messages.appendChild(el);el.scrollIntoView({behavior:'smooth',block:'nearest'});}
+function reply(text){
+ let answer='Recebi sua mensagem. Minha conexão com o mecanismo de inteligência artificial será configurada na próxima etapa.';
+ const t=text.toLowerCase();
+ if(t.includes('pode fazer')) answer='Posso conversar, responder perguntas, ajudar a organizar tarefas e pesquisar informações. Na próxima etapa vamos conectar meu cérebro de IA.';
+ else if(t.includes('organizar')) answer='Vamos organizar seu dia. Quando minha IA estiver conectada, poderei ajudar a montar uma agenda e acompanhar suas tarefas.';
+ else if(t.includes('curiosidade')) answer='Curiosidade: a palavra “Gaia” vem da mitologia grega e representa a personificação da Terra.';
+ setTimeout(()=>add(answer,'gaia'),450);
+}
+document.getElementById('chat').addEventListener('submit',e=>{e.preventDefault();const value=entry.value.trim();if(!value)return;add(value,'user');entry.value='';reply(value);});
+document.querySelectorAll('[data-prompt]').forEach(b=>b.addEventListener('click',()=>{entry.value=b.dataset.prompt;document.getElementById('chat').requestSubmit();}));
+document.getElementById('voice').addEventListener('click',()=>{if(!('speechSynthesis' in window)){add('A leitura em voz alta não está disponível neste navegador.','gaia');return;}const u=new SpeechSynthesisUtterance('Olá. Eu sou a Gaia. Estou pronta para conversar e ajudar.');u.lang='pt-BR';u.rate=.88;u.pitch=.78;speechSynthesis.cancel();speechSynthesis.speak(u);});
+</script>
+</body>
+</html>
